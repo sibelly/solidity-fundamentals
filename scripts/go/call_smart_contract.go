@@ -4,10 +4,8 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"math/big"
 	"os"
 
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/joho/godotenv"
@@ -48,19 +46,33 @@ func main() {
 	}
 	fmt.Println("Latest block:", block.Number().Uint64())
 
-	// Load the contract's ABI
-	// ContractABI is the ABI for the smart contract
-	var ContractABI = []byte(`[ABI encoded as a string]`)
-	contractAbi := bind.NewBoundContract(common.HexToAddress("0x1234567890abcdef"), ContractABI, client, client, client)
+	// // Load the contract's ABI
+	// // ContractABI is the ABI for the smart contract
+	// var ContractABI = []byte(`[ABI encoded as a string]`)
+	// contractAbi := bind.NewBoundContract(common.HexToAddress("0x1234567890abcdef"), ContractABI, client, client, client)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// // Call the contract's function
+	// result, err := contractAbi.FunctionName(context.Background(), big.NewInt(123), "Hello, world")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Println(result)
+
+	// Instantiate the contract and display its name
+	address := common.HexToAddress("0x85Fe28EBe587C503055471813d146b365C5f146F")
+	simpleStorage, err := NewMain(address, client)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to instantiate a Token contract: %v", err)
 	}
 
-	// Call the contract's function
-	result, err := contractAbi.FunctionName(context.Background(), big.NewInt(123), "Hello, world")
+	// Access simpleStorage properties
+	name, err := simpleStorage.FavoriteNumber(nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to retrieve token name: %v", err)
 	}
-	fmt.Println(result)
+	fmt.Println("Token name:", name)
 
 }

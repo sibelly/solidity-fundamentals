@@ -9,15 +9,15 @@ npx hardhat help
 npx hardhat test
 REPORT_GAS=true npx hardhat test
 npx hardhat node
-npx hardhat run scripts/deploy.js
+npx hardhat run scripts/js/deploy.js
 
 npx hardhat compile
-npx hardhat run scripts/deploy.js --network goerli
+npx hardhat run scripts/js/deploy.js --network goerli
 npx hardhat verify --network goerli DEPLOYED_CONTRACT_ADDRESS
 ```
 
 ```
-go run scripts/call_smart_contract.go
+go run scripts/go/call_smart_contract.go
 ```
 
 ## Generate the abi and bin smart contract code
