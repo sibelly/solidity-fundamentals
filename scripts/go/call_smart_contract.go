@@ -21,10 +21,8 @@ func init() {
 }
 
 func main() {
-	fmt.Println("%d", os.Getenv("GOERLI_ALCHEMY_URL"))
-	GOERLI_ALCHEMY_URL := os.Getenv("GOERLI_ALCHEMY_URL")
 
-	url := fmt.Sprintf(GOERLI_ALCHEMY_URL)
+	url := os.Getenv("GOERLI_ALCHEMY_URL")
 	client, err := ethclient.Dial(url)
 	if err != nil {
 		log.Fatal(err)
